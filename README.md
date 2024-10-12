@@ -1,4 +1,8 @@
-# Getting Started
+# Scrapy Docker Template
+
+This template provides a ready-to-use setup for containerizing Scrapy projects using Docker. It allows you to easily deploy your web scrapers in isolated Docker environments and save scraped data to local files or databases.
+
+## Getting Started
 ## 1. Prepare Your Scrapy Project
 
 Make sure your Scrapy project is set up correctly and working locally before containerizing it. Here’s a basic structure for your Scrapy project:
