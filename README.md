@@ -1,7 +1,8 @@
+# Getting Started
 ## 1. Prepare Your Scrapy Project
 
 Make sure your Scrapy project is set up correctly and working locally before containerizing it. Here’s a basic structure for your Scrapy project:
-
+```
 your-scrapy-project/
 │
 ├── scrapy.cfg
@@ -12,30 +13,28 @@ your-scrapy-project/
 │   └── settings.py
 ├── requirements.txt
 └── Dockerfile
-
-	•	scrapy.cfg: Contains the configuration for the Scrapy project.
-	•	your_spider/: This directory holds your Scrapy project, including spiders, pipelines, and settings.
-	•	requirements.txt: Contains the Python dependencies for your project.
+```
+- **scrapy.cfg**: Contains the configuration for the Scrapy project.
+- **your_spider/**: This directory holds your Scrapy project, including spiders, pipelines, and settings.
+- **requirements.txt**: Contains the Python dependencies for your project.
 
 ## 2. Create Your Dockerfile
 
-Explanation of Key Steps in Dockerfile:
-
-	•	Base image: Using Python 3.11.
-	•	WORKDIR: Sets the working directory to /app.
-	•	COPY: Copies your project files into the container.
-	•	Install dependencies: Install necessary system packages and Python dependencies.
-	•	Create and use a virtual environment: Ensures an isolated environment for your Python dependencies.
-	•	Scrapy spider execution: It runs your Scrapy spider (your_spider_name) and saves the data into /app/data/output.json.
+- Base image: Using Python 3.11.
+- WORKDIR: Sets the working directory to /app.
+- COPY: Copies your project files into the container.
+- Install dependencies: Install necessary system packages and Python dependencies.
+- Create and use a virtual environment: Ensures an isolated environment for your Python dependencies.
+- Scrapy spider execution: It runs your Scrapy spider (your_spider_name) and saves the data into /app/data/output.csv.
 
 ## 3. Ensure the Requirements are Correct
 
 In your requirements.txt, list all the Python libraries your Scrapy project needs, including Scrapy itself. For example:
-
+```
 scrapy==2.11.2
 pymongo==3.12.0  # if you're using MongoDB
 mysql-connector-python==8.0.26  # if you're using MySQL
-
+```
 ## 4. Build the Docker Image
 
 Now, navigate to your project directory and build the Docker image:
@@ -50,8 +49,8 @@ docker run -v $(pwd)/data:/app/data your-scrapy-image
 ```
 This command:
 
-	•	Runs the container.
-	•	Mounts your local data folder (in the current working directory) to the /app/data folder inside the container so that the scraped data is saved outside the container.
+- Runs the container.
+- Mounts your local data folder (in the current working directory) to the /app/data folder inside the container so that the scraped data is saved outside the container.
 
 ## 6. Check the Output
 
@@ -64,10 +63,10 @@ If you prefer to store data in a database (like MySQL or MongoDB), follow these 
 a. Install the Database Driver
 
 Add the relevant driver (like pymongo or mysql-connector-python) to your requirements.txt. For example:
-
+```
 pymongo==3.12.0  # For MongoDB
 mysql-connector-python==8.0.26  # For MySQL
-
+```
 b. Modify the Spider to Save Data in a Database
 
 Update your spider’s parse function to insert data into a database instead of saving to a file.
@@ -102,11 +101,12 @@ Make sure the database connection details are available in your environment vari
 
 Once everything is working locally, you can deploy your Docker container to a cloud service such as AWS, Google Cloud, or Azure. Most cloud services support Docker containers, and you can use their container orchestration services like Kubernetes or Docker Swarm to manage your deployments.
 
-Summary of Steps:
-
-	1.	Set up your Scrapy project and Dockerfile.
-	2.	Write a Dockerfile with the necessary dependencies, including virtual environment setup.
-	3.	Build the Docker image using docker build -t your-scrapy-image ..
-	4.	Run the container with docker run -v $(pwd)/data:/app/data your-scrapy-image to scrape data and save it to a local file.
-	5.	Optionally modify your spider to store data in a database (MongoDB, MySQL, etc.).
-	6.	Deploy to the cloud if necessary.
+## Summary of Steps:
+```
+1. Set up your Scrapy project and Dockerfile.
+2. Write a Dockerfile with the necessary dependencies, including virtual environment setup.
+3. Build the Docker image using docker build -t your-scrapy-image ..
+4. Run the container with docker run -v $(pwd)/data:/app/data your-scrapy-image to scrape data and save it to a local file.
+5. Optionally modify your spider to store data in a database (MongoDB, MySQL, etc.).
+6. Deploy to the cloud if necessary.
+```
