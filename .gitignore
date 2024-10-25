@@ -1,2 +1,4 @@
 schedule/schedule/spiders/emploipartner.py
 .venv
+__pycache__/
+__init__.py
